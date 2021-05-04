@@ -21,6 +21,16 @@ class TicTacToeLogic
   end
 
   def winner
-    return 'X' if @turn == 5
+    return :tie if @turn == 9
+
+    3.times do |i|
+      lines = [@board.row(i), @board.column(i), @board.diagonal(i)]
+      p lines
+      x_in_line = lines.map { |line| line.count('X') }
+      o_in_line = lines.map { |line| line.count('O') }
+      return 'X' if x_in_line.max == 3
+      return 'O' if o_in_line.max == 3
+    end
+    false
   end
 end

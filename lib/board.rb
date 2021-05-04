@@ -28,7 +28,9 @@ class Board
 
   def diagonal(index)
     case index
-    when 0 || 1
+    when 0
+      diagonal(1)
+    when 1
       [@board[0], @board[4], @board[8]]
     when 2
       [@board[2], @board[4], @board[6]]

@@ -66,6 +66,8 @@ class TicTacToeUI
       puts 'That cell is not available!' unless good_play
       puts "It's #{@players[playing]}'s turn!"
       puts 'Please select an available cell from the board'
+      puts
+      puts 'The following map indicates the cell identifiers'
       display_board(@map)
       move = gets.chomp.to_i - 1
       good_play = @game.play(move, @tokens[playing])

@@ -10,9 +10,15 @@ class TicTacToeUI
     puts separator
   end
 
+  def color_char(string, char, color)
+    string.gsub(char, char.colorize(color))
+  end
+
   def display_row(row, color)
     row_string = "| #{row[0]} | #{row[1]} | #{row[2]} |"
-    row_string = row_string.colorize(color) if color
+    row_string = color_char(row_string, 'X', @colors[0])
+    row_string = color_char(row_string, 'O', @colors[1])
+    row_string = color_char(row_string, '|', color) if color
     puts row_string
   end
 
@@ -27,7 +33,7 @@ class TicTacToeUI
   def initialize
     @map = Board.new(:map)
     @players = %w[April Tynnyfer]
-    @tokens = ['X'.colorize(:green), 'O'.colorize(:red)]
+    @tokens = %w[X O]
     @colors = %i[green red]
     @game = TicTacToeLogic.new
   end
@@ -51,16 +57,19 @@ class TicTacToeUI
   end
 
   def play
+    good_play = true
     loop do
       clear
       playing = @game.turn % 2
       display_board(@game.board)
       puts
+      puts 'That cell is not available!' unless good_play
       puts "It's #{@players[playing]}'s turn!"
       puts 'Please select an available cell from the board'
       display_board(@map)
       move = gets.chomp.to_i - 1
-      return if @game.play(move, @tokens[playing])
+      good_play = @game.play(move, @tokens[playing])
+      return if good_play
     end
   end
 

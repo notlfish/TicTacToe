@@ -57,12 +57,14 @@ class TicTacToeUI
   end
 
   def play
+    good_input = true
     good_play = true
     loop do
       clear
       playing = @game.turn % 2
       display_board(@game.board)
       puts
+      puts 'Input a cell index to play' unless good_input
       puts 'That cell is not available!' unless good_play
       puts "It's #{@players[playing]}'s turn!"
       puts 'Please select an available cell from the board'
@@ -70,8 +72,8 @@ class TicTacToeUI
       puts 'The following map indicates the cell identifiers'
       display_board(@map)
       move = gets.chomp.to_i - 1
-      good_play = @game.play(move, @tokens[playing])
-      return if good_play
+      good_input = (0..8).member? move
+      return if good_input && @game.play(move, @tokens[playing])
     end
   end
 

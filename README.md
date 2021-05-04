@@ -11,12 +11,13 @@ This project aims to implement a Tic Tac Toe game with a command line interface 
   - Bundler
   - RuboCop
   - RSpec
+  - Colorize
 
 ## Getting Started
 
 **To use the code in this project, you'll need to have Ruby and the gem bundle installed in your computer.**
 
-To get a local copy up and running follow these simple steps:
+To get a local copy up and running follow the following simple steps:
 
 On GitHub bash:
 
@@ -24,6 +25,7 @@ On GitHub bash:
 - To enter the project folder, run `cd Tictactoe`.
   To install the required dependencies, run `bundle install`
 - To run the game, run `bin/main.rb` in an editor.
+- Follow the game rules to play, have fun!
 
 ### Prerequisites
 
@@ -33,7 +35,7 @@ Ruby and Bundler must be installed on your computer (versions 3.0.1 and 2.2.15, 
 
 - RuboCop is set up to run locally. Just run `rubocop` in the root of the repo.
 - Additionally, run `bundle install` to install the project's dependencies.
-- Finally, run `bundle exec rspec spec/main_spec.rb` to perform the provided tests.
+- Finally, run `bundle exec rspec spec/` to perform the provided tests.
 
 ## Authors
 

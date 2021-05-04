@@ -1,11 +1,25 @@
 require 'spec_helper'
 require_relative '../bin/main'
+require_relative '../lib/board'
 
-RSpec.describe '#main' do
-  describe 'Greeting message' do
-    it 'Prints "Hello world!" to stdout' do
-      allow($stdout).to receive(:puts).with('Hello world!')
-      expect(main).to be nil
+map_output = <<~OUT
+  +---+---+---+
+  | 1 | 2 | 3 |
+  +---+---+---+
+  | 4 | 5 | 6 |
+  +---+---+---+
+  | 7 | 8 | 9 |
+  +---+---+---+
+OUT
+
+RSpec.describe 'Tests for TicTacToeUI' do
+  describe 'Test for #display_board' do
+    it 'Prints example board to stdout' do
+      expect do
+        ui = TicTacToeUI.new
+        mock = Board.new(:map)
+        ui.display_board(mock)
+      end.to output(map_output).to_stdout
     end
   end
 end

@@ -9,7 +9,9 @@ class TicTacToeLogic
   end
 
   def valid_move?(move)
-    (0..8).member?(move) && @board.available?(move)
+    raise ArgumentError, 'Invalid move' unless (0..8).member?(move)
+
+    @board.available?(move)
   end
 
   def play(move, token)
@@ -25,7 +27,6 @@ class TicTacToeLogic
 
     3.times do |i|
       lines = [@board.row(i), @board.column(i), @board.diagonal(i)]
-      p lines
       x_in_line = lines.map { |line| line.count('X') }
       o_in_line = lines.map { |line| line.count('O') }
       return 'X' if x_in_line.max == 3

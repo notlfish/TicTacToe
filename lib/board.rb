@@ -40,11 +40,14 @@ class Board
   end
 
   def available?(index)
+    index_error('index') unless (0..8).member? index
+
     @board[index] == ' '
   end
 
   def update(index, token)
     index_error('index') unless (0..8).member? index
+
     @board[index] = token
   end
 end

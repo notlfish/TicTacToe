@@ -37,7 +37,7 @@ RSpec.describe 'Tests for Board' do
   end
 
   describe 'Test for #update' do
-    it 'Returns updates pointed element' do
+    it 'Updates pointed element' do
       map = Board.new(:map)
       map.update(2, 'X')
       expect(map.row(0)).to eq(%w[1 2 X])
@@ -45,6 +45,22 @@ RSpec.describe 'Tests for Board' do
 
     it 'Raises ArgumentError for invalid index' do
       expect { map.update(10, nil) }.to raise_error(ArgumentError)
+    end
+  end
+
+  describe 'Test for #available?' do
+    board = Board.new
+    board.update(2, 'X')
+    it 'True for available cell' do
+      expect(board.available?(0)).to be(true)
+    end
+
+    it 'False for occupied cell' do
+      expect(board.available?(2)).to be(false)
+    end
+
+    it 'Raises ArgumentError for invalid index' do
+      expect { board.available?(10) }.to raise_error(ArgumentError)
     end
   end
 end

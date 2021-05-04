@@ -8,8 +8,8 @@ class Board
   public
 
   def initialize(kind = nil)
-    @board = Array.new(9, nil)
-    @board = (1..9).to_a if kind == :map
+    @board = Array.new(9, ' ')
+    @board = ('1'..'9').to_a if kind == :map
   end
 
   def row(index)
@@ -35,6 +35,10 @@ class Board
     else
       index_error('diagonal')
     end
+  end
+
+  def available?(index)
+    @board[index] == ' '
   end
 
   def update(index, token)

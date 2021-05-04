@@ -4,7 +4,7 @@ require_relative '../lib/board'
 
 RSpec.describe 'Tests for TicTacToeUI' do
   describe 'Test for #display_board' do
-    it 'Prints "Hello world!" to stdout' do
+    it 'Prints example board to stdout' do
       message = <<~MSG
         +---+---+---+
         | 1 | 2 | 3 |

@@ -7,7 +7,7 @@ map = Board.new(:map)
 RSpec.describe 'Tests for Board' do
   describe 'Test for #row' do
     it 'Returns appropriate row' do
-      expect(map.row(0)).to eq([1, 2, 3])
+      expect(map.row(0)).to eq(%w[1 2 3])
     end
 
     it 'Raises ArgumentError for invalid index' do
@@ -17,7 +17,7 @@ RSpec.describe 'Tests for Board' do
 
   describe 'Test for #column' do
     it 'Returns appropriate column' do
-      expect(map.column(0)).to eq([1, 4, 7])
+      expect(map.column(0)).to eq(%w[1 4 7])
     end
 
     it 'Raises ArgumentError for invalid index' do
@@ -27,8 +27,8 @@ RSpec.describe 'Tests for Board' do
 
   describe 'Test for #diagonal' do
     it 'Returns appropriate diagonal' do
-      expect(map.diagonal(0)).to eq([1, 5, 9])
-      expect(map.diagonal(2)).to eq([3, 5, 7])
+      expect(map.diagonal(0)).to eq(%w[1 5 9])
+      expect(map.diagonal(2)).to eq(%w[3 5 7])
     end
 
     it 'Raises ArgumentError for invalid index' do
@@ -40,7 +40,7 @@ RSpec.describe 'Tests for Board' do
     it 'Returns updates pointed element' do
       map = Board.new(:map)
       map.update(2, 'X')
-      expect(map.row(0)).to eq([1, 2, 'X'])
+      expect(map.row(0)).to eq(%w[1 2 X])
     end
 
     it 'Raises ArgumentError for invalid index' do

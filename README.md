@@ -74,7 +74,7 @@ X win with 3 marks in a diagonal
 ```
 
 # Playing with this App
-To play this app up and running follow the instructions in Getting Started.
+To play this app up and running follow the instructions in [Getting Started](#getting-started).
 You can exit the game at any point by pressing ```Ctrl C```.
 
 - The game begins with a screen where the players are prompted to input their names.

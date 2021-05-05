@@ -28,7 +28,7 @@ On GitHub bash:
 - Follow the game rules to play, have fun!
 
 ## Playing Tic Tac Toe
-Tic Tac Toe is a strategy game between two players
+[Tic Tac Toe](https://en.wikipedia.org/wiki/Tic-tac-toe) is a strategy game between two players
 
 # Game rules
 The Tic Tac Toe board is a 3 by 3 grid of cells.

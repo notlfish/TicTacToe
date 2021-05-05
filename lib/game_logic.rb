@@ -22,16 +22,15 @@ class TicTacToeLogic
     true
   end
 
-  def winner
+  def winner(tokens)
+    winner_lines = tokens.map { |token| Array.new(3, token) }
+    winner_lines.each do |winner_line|
+      winner_token = winner_line[0]
+      return winner_token if @board.lines.any?(winner_line)
+    end
+
     return :tie if @turn == 9
 
-    3.times do |i|
-      lines = [@board.row(i), @board.column(i), @board.diagonal(i)]
-      x_in_line = lines.map { |line| line.count('X') }
-      o_in_line = lines.map { |line| line.count('O') }
-      return 'X' if x_in_line.max == 3
-      return 'O' if o_in_line.max == 3
-    end
     false
   end
 end

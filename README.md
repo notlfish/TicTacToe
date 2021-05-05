@@ -92,7 +92,7 @@ You can exit the game at any point by pressing ```Ctrl C```.
   - If your input is not the number of a cell, you're asked again to make your play.
   - A map with the number of each cell is displayed in the bottom of the screen.
 
-![Player 1 make a move](assets/game-start.png)
+![Player 1 make a move](assets/player-1-turn.png)
 
 - After that, the corresponding player is asked to play in each turn.
   - You can only choose free cells to make your move.

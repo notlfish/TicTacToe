@@ -3,6 +3,12 @@ require_relative '../lib/board'
 require_relative '../lib/game_logic'
 require 'colorize'
 
+def numeric?(string)
+  !Float(string).nil?
+rescue StandardError
+  false
+end
+
 class TicTacToeUI
   def display_separator(color)
     separator = '+---+---+---+'
@@ -43,13 +49,17 @@ class TicTacToeUI
     2.times do |i|
       puts "Enter Player #{i + 1} name:"
       name = gets.chomp
+      if numeric?(name)
+        puts 'A player name cannot be a number'
+        return init_prompt
+      end
       @players[i] = name unless name.empty?
       @players[i] = @players[i].colorize(@colors[i])
     end
-    puts "#{@players[0]} will play #{@tokens[0]} and "\
-         "#{@players[1]} will play #{@tokens[1]}"
+    puts "#{@players[0]} will play #{@tokens[0].colorize(@colors[0])} and "\
+         "#{@players[1]} will play #{@tokens[1].colorize(@colors[1])}"
     puts
-    puts "Let's play"
+    puts "Let's play!"
   end
 
   def clear
@@ -57,21 +67,24 @@ class TicTacToeUI
   end
 
   def play
+    good_input = true
     good_play = true
     loop do
       clear
       playing = @game.turn % 2
       display_board(@game.board)
       puts
+      puts 'Input a cell index to play' unless good_input
       puts 'That cell is not available!' unless good_play
       puts "It's #{@players[playing]}'s turn!"
       puts 'Please select an available cell from the board'
       puts
       puts 'The following map indicates the cell identifiers'
+      puts
       display_board(@map)
       move = gets.chomp.to_i - 1
-      good_play = @game.play(move, @tokens[playing])
-      return if good_play
+      good_input = (0..8).member? move
+      return if good_input && @game.play(move, @tokens[playing])
     end
   end
 
@@ -93,10 +106,13 @@ class TicTacToeUI
   end
 
   def run!
+    clear
     init_prompt
+    puts 'Press enter to continue'
+    gets
     loop do
       play
-      winner = @game.winner
+      winner = @game.winner(@tokens)
       if winner
         win_message(winner)
         return

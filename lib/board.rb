@@ -2,7 +2,7 @@ class Board
   private
 
   def index_error(dir)
-    raise ArgumentError, "The #{dir} out of bounds"
+    raise ArgumentError, "#{dir} out of bounds"
   end
 
   public
@@ -28,8 +28,6 @@ class Board
 
   def diagonal(index)
     case index
-    when 0
-      diagonal(1)
     when 1
       [@board[0], @board[4], @board[8]]
     when 2
@@ -49,5 +47,16 @@ class Board
     index_error('index') unless (0..8).member? index
 
     @board[index] = token
+  end
+
+  def lines
+    res = []
+    3.times do |i|
+      res.push(row(i))
+      res.push(column(i))
+    end
+    res.push(diagonal(1))
+    res.push(diagonal(2))
+    res
   end
 end

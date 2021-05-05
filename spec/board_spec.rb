@@ -27,7 +27,7 @@ RSpec.describe 'Tests for Board' do
 
   describe 'Test for #diagonal' do
     it 'Returns appropriate diagonal' do
-      expect(map.diagonal(0)).to eq(%w[1 5 9])
+      expect(map.diagonal(1)).to eq(%w[1 5 9])
       expect(map.diagonal(2)).to eq(%w[3 5 7])
     end
 

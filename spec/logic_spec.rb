@@ -10,6 +10,7 @@ def test_game
   test_game.play(8, 'O')
   test_game
 end
+tokens = %w[X O]
 
 RSpec.describe 'Tests for TicTacToeLogic' do
   describe 'Tests for #valid_move?' do
@@ -53,25 +54,25 @@ RSpec.describe 'Tests for TicTacToeLogic' do
 
   describe 'Test for #winner' do
     it 'Returs false for ongoing game' do
-      expect(test_game.winner).to be(false)
+      expect(test_game.winner(tokens)).to be(false)
     end
 
     win_row = TicTacToeLogic.new
     3.times { |i| win_row.play(i, 'X') }
 
     it 'Returns winner token when X wins' do
-      expect(win_row.winner).to eq('X')
+      expect(win_row.winner(tokens)).to eq('X')
     end
 
     it 'Returns winner token when win on row' do
-      expect(win_row.winner).to eq('X')
+      expect(win_row.winner(tokens)).to eq('X')
     end
 
     win_col = TicTacToeLogic.new
     3.times { |i| win_col.play(3 * i, 'X') }
 
     it 'Returns winner token when win on col' do
-      expect(win_col.winner).to eq('X')
+      expect(win_col.winner(tokens)).to eq('X')
     end
 
     win_diag = TicTacToeLogic.new
@@ -80,11 +81,11 @@ RSpec.describe 'Tests for TicTacToeLogic' do
     win_diag.play(6, 'O')
 
     it 'Returns winner token when win on diagonal' do
-      expect(win_diag.winner).to eq('O')
+      expect(win_diag.winner(tokens)).to eq('O')
     end
 
     it 'Returns winner token when O wins' do
-      expect(win_diag.winner).to eq('O')
+      expect(win_diag.winner(tokens)).to eq('O')
     end
 
     it 'Returns :tie for tied game' do
@@ -92,9 +93,19 @@ RSpec.describe 'Tests for TicTacToeLogic' do
       tied_game.play(2, 'X')
       tied_game.play(3, 'O')
       tied_game.play(5, 'O')
-      tied_game.play(6, 'X')
+      tied_game.play(6, 'O')
       tied_game.play(7, 'X')
-      expect(tied_game.winner).to eq(:tie)
+      expect(tied_game.winner(tokens)).to eq(:tie)
+    end
+
+    it 'Returns winner token when win on last move' do
+      won_last = test_game
+      won_last.play(2, 'X')
+      won_last.play(5, 'O')
+      won_last.play(6, 'X')
+      won_last.play(7, 'O')
+      won_last.play(3, 'X')
+      expect(won_last.winner(tokens)).to eq('X')
     end
   end
 end

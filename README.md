@@ -27,6 +27,87 @@ On GitHub bash:
 - To run the game, run `bin/main.rb` in an editor.
 - Follow the game rules to play, have fun!
 
+## Playing Tic Tac Toe
+Tic Tac Toe is a strategy game between two players
+
+# Game rules
+The Tic Tac Toe board is a 3 by 3 grid of cells.
+
+Tic Tac Toe is a turned based game in which each player marks one of the empty cells of the board each turn.
+
+To win the game you have to put three of your marks in a line. It could be three in a row, three in a column, or three in one of the diagonals. The first player to accomplish this wins the game.
+
+If all of the cells are occupied without any of the players winning, the game is a tie.
+
+Example games:
+X won with 3 marks in a row
+```
++---+---+---+
+|   |   |   |
++---+---+---+
+| X | X | X |
++---+---+---+
+| O | O |   |
++---+---+---+
+```
+
+O win with 3 marks in a column
+```
++---+---+---+
+| O | X |   |
++---+---+---+
+| O | X | X |
++---+---+---+
+| O |   |   |
++---+---+---+
+```
+
+X win with 3 marks in a diagonal
+```
++---+---+---+
+| X | X |   |
++---+---+---+
+| O | X |   |
++---+---+---+
+| O | O | X |
++---+---+---+
+```
+
+# Playing with this App
+To play this app up and running follow the instructions in Getting Started.
+You can exit the game at any point by pressing ```Ctrl C```.
+
+- The game begins with a screen where the players are prompted to input their names.
+  - To input a name, write it down with the keyboard and press enter.
+  - A player name must begin with a letter, if this condition isn't met, both players will have to input their names again.
+  - If an empty name is given, the game will choose a default name for that player
+  - After both players have entered their names, an information prompt is written on the screen (See example image below). You have to press enter to begin the game.
+
+![Press enter to begin playing](assets/names-screen.png)
+
+- When the game begins player 1 is asked to make a play.
+  - To make a play, you have to select one of the free cells in the board.
+  - The game board is displayed on top of the screen.
+  - You select a cell by inputting it's number.
+  - If your input is not the number of a cell, you're asked again to make your play.
+  - A map with the number of each cell is displayed in the bottom of the screen.
+
+![Player 1 make a move](assets/game-start.png)
+
+- After that, the corresponding player is asked to play in each turn.
+  - You can only choose free cells to make your move.
+  - If you choose an occupied cell, you're asked again to make your play.
+
+![Tynnyfer tried to play an occupied cell](assets/bad-move-tynnyfer.png)
+
+- When a player wins, the board turns to that player's color and a congratulatory message is printed.
+  - If the game is a tie, the board turns yellow.
+  - The configuration of your terminal application may change the coloring of the game.
+  - After the game concludes, the application exits.
+
+![Player 2 won](assets/game-won.png)
+
+
 ### Prerequisites
 
 Ruby and Bundler must be installed on your computer (versions 3.0.1 and 2.2.15, respectively)

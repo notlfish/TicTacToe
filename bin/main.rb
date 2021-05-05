@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+
 require_relative '../lib/board'
 require_relative '../lib/game_logic'
 require 'colorize'
@@ -66,25 +67,30 @@ class TicTacToeUI
     Gem.win_platform? ? (system 'cls') : (system 'clear')
   end
 
+  def play_promt(player, last_input, last_play)
+    puts
+    puts 'Input a cell index to play' unless last_input
+    puts 'That cell is not available!' unless last_play
+    puts "It's #{player}'s turn!"
+    puts 'Please select an available cell from the board'
+    puts
+    puts 'The following map indicates the cell identifiers'
+    puts
+  end
+
   def play
-    good_input = true
-    good_play = true
+    last_input = true
+    last_play = true
     loop do
       clear
       playing = @game.turn % 2
       display_board(@game.board)
-      puts
-      puts 'Input a cell index to play' unless good_input
-      puts 'That cell is not available!' unless good_play
-      puts "It's #{@players[playing]}'s turn!"
-      puts 'Please select an available cell from the board'
-      puts
-      puts 'The following map indicates the cell identifiers'
-      puts
+      play_promt(@players[playing], last_input, last_play)
       display_board(@map)
       move = gets.chomp.to_i - 1
-      good_input = (0..8).member? move
-      return if good_input && @game.play(move, @tokens[playing])
+      last_input = (0..8).member? move
+      last_play = @game.play(move, @tokens[playing])
+      return if last_input && last_play
     end
   end
 
@@ -123,5 +129,9 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   ui = TicTacToeUI.new
-  ui.run!
+  begin
+    ui.run!
+  rescue Interrupt
+    raise SystemExit
+  end
 end

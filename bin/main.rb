@@ -89,8 +89,10 @@ class TicTacToeUI
       display_board(@map)
       move = gets.chomp.to_i - 1
       last_input = (0..8).member? move
-      last_play = @game.play(move, @tokens[playing])
-      return if last_input && last_play
+      if last_input
+        last_play = @game.play(move, @tokens[playing])
+        return if last_input && last_play
+      end
     end
   end
 

@@ -4,12 +4,6 @@ require_relative '../lib/board'
 require_relative '../lib/game_logic'
 require 'colorize'
 
-def numeric?(string)
-  !Float(string).nil?
-rescue StandardError
-  false
-end
-
 def clear_screen
   Gem.win_platform? ? (system 'cls') : (system 'clear')
 end
@@ -35,30 +29,16 @@ class TicTacToeUI
     puts row_string
   end
 
-  public
-
-  def display_board(board, color = nil)
-    3.times do |i|
-      display_separator(color)
-      display_row(board.row(i), color)
-    end
-    display_separator(color)
-  end
-
-  def initialize
-    @map = Board.new(:map)
-    @players = %w[April Tynnyfer]
-    @tokens = %w[X O]
-    @colors = %i[green red]
-    @game = TicTacToeLogic.new
+  def valid_name?(name)
+    name.empty? || name[0].match(/^[[:alpha:]]$/)
   end
 
   def input_names
     2.times do |i|
       puts "Enter Player #{i + 1} name:"
       name = gets.chomp
-      if numeric?(name)
-        puts 'A player name cannot be a number'
+      unless valid_name?(name)
+        puts 'A player name must begin with a letter'
         return init_prompt
       end
       @players[i] = name unless name.empty?
@@ -110,13 +90,27 @@ class TicTacToeUI
 
       clear_screen
       display_board(@game.board, @colors[i])
-      puts "#{@players[i]} you won the game!".colorize(@colors[i])
+      puts "#{@players[i]} you won the game!".colorize(@colors[i]) if i < 2
+      puts 'Game tied!'.colorize(@colors[i]) if i == 2
     end
-    return unless winner == :tie
+  end
 
-    clear_screen
-    display_board(@game.board, :yellow)
-    puts 'Game tied!'.colorize(:yellow)
+  public
+
+  def initialize
+    @map = Board.new(:map)
+    @players = %w[April Tynnyfer]
+    @tokens = ['X', 'O', :tie]
+    @colors = %i[green red yellow]
+    @game = TicTacToeLogic.new
+  end
+
+  def display_board(board, color = nil)
+    3.times do |i|
+      display_separator(color)
+      display_row(board.row(i), color)
+    end
+    display_separator(color)
   end
 
   def run!

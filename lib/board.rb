@@ -5,19 +5,6 @@ class Board
     raise ArgumentError, "#{dir} out of bounds"
   end
 
-  public
-
-  def initialize(kind = nil)
-    @board = Array.new(9, ' ')
-    @board = ('1'..'9').to_a if kind == :map
-  end
-
-  def row(index)
-    index_error('row') unless (0..2).member? index
-
-    @board[index * 3, 3]
-  end
-
   def column(index)
     index_error('column') unless (0..2).member? index
 
@@ -35,6 +22,19 @@ class Board
     else
       index_error('diagonal')
     end
+  end
+
+  public
+
+  def initialize(kind = nil)
+    @board = Array.new(9, ' ')
+    @board = ('1'..'9').to_a if kind == :map
+  end
+
+  def row(index)
+    index_error('row') unless (0..2).member? index
+
+    @board[index * 3, 3]
   end
 
   def available?(index)
